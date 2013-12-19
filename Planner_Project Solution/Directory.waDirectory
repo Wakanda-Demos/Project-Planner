@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><directory>
+	<group ID="01000000000000000000000000000000" name="Admin">	</group>
+	<group ID="B755F63EBAF7C7479F89D5A32A34CFB4" name="Director"/>
+	<group ID="773216522F8D96448404880CD52C28D2" name="Manager">
+		<include group="Director" groupID="B755F63EBAF7C7479F89D5A32A34CFB4"/>
+	</group>
+	<group ID="A2F63982DCA0DC4880738664C7827F35" name="Employee">
+		<include group="Manager" groupID="773216522F8D96448404880CD52C28D2"/>
+		<include group="Director" groupID="B755F63EBAF7C7479F89D5A32A34CFB4"/>
+	</group>
+</directory>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><permissions>
+	<allow type="module" resource="rpcModule" action="executeFromClient"/>
+	<allow action="create" groupName="Director" groupID="B755F63EBAF7C7479F89D5A32A34CFB4" resource="Model.Project" temporaryForcePermissions="false" type="dataClass"/>
+	<allow action="update" groupName="Manager" groupID="773216522F8D96448404880CD52C28D2" resource="Model.Project" temporaryForcePermissions="false" type="dataClass"/>
+	<allow action="remove" groupName="Director" groupID="B755F63EBAF7C7479F89D5A32A34CFB4" resource="Model.Project" temporaryForcePermissions="false" type="dataClass"/>
+	<allow action="read" groupName="Employee" groupID="A2F63982DCA0DC4880738664C7827F35" resource="Model.Project" temporaryForcePermissions="false" type="dataClass"/>
+	<allow action="create" groupName="Director" groupID="B755F63EBAF7C7479F89D5A32A34CFB4" resource="Model.Project.Cost" temporaryForcePermissions="false" type="attribute"/>
+	<allow action="update" groupName="Manager" groupID="773216522F8D96448404880CD52C28D2" resource="Model.Project.Cost" temporaryForcePermissions="false" type="attribute"/>
+	<allow action="read" groupName="Manager" groupID="773216522F8D96448404880CD52C28D2" resource="Model.Project.Budget" temporaryForcePermissions="false" type="attribute"/>
+	<allow action="create" groupName="Director" groupID="B755F63EBAF7C7479F89D5A32A34CFB4" resource="Model.Project.Budget" temporaryForcePermissions="false" type="attribute"/>
+	<allow action="update" groupName="Manager" groupID="773216522F8D96448404880CD52C28D2" resource="Model.Project.Budget" temporaryForcePermissions="false" type="attribute"/>
+	<allow action="read" groupName="Director" groupID="B755F63EBAF7C7479F89D5A32A34CFB4" resource="Model.Employee.salary" temporaryForcePermissions="false" type="attribute"/>
+	<allow action="read" groupName="Director" groupID="B755F63EBAF7C7479F89D5A32A34CFB4" resource="Model.Employee.salaryY" temporaryForcePermissions="false" type="attribute"/>
+	<allow action="read" groupName="Manager" groupID="773216522F8D96448404880CD52C28D2" resource="Model.Project.Cost" temporaryForcePermissions="false" type="attribute"/>
+</permissions>

@@ -1,0 +1,468 @@
+﻿{
+	"toJSON": true,
+	"extraProperties": {
+		"version": "2",
+		"classes": {
+			"Employee": {
+				"panelColor": "#E5B9B7",
+				"panel": {
+					"isOpen": "true",
+					"position": {
+						"X": 741,
+						"Y": 46
+					}
+				}
+			},
+			"Project": {
+				"panelColor": "#fff",
+				"panel": {
+					"isOpen": "true",
+					"position": {
+						"X": 43,
+						"Y": 21
+					}
+				}
+			},
+			"Project_Employee": {
+				"panelColor": "#B2A2C7",
+				"panel": {
+					"isOpen": "true",
+					"position": {
+						"X": 74,
+						"Y": 520
+					}
+				}
+			},
+			"Project_Skill": {
+				"panelColor": "#76923C",
+				"panel": {
+					"isOpen": "true",
+					"position": {
+						"X": 436,
+						"Y": 152
+					}
+				}
+			},
+			"Skill": {
+				"panelColor": "#CCC1D9",
+				"panel": {
+					"isOpen": "true",
+					"position": {
+						"X": 477,
+						"Y": 537
+					}
+				}
+			}
+		},
+		"model": {
+			"scriptMode": "manual",
+			"workspaceLeft": 0,
+			"workspaceTop": 0
+		}
+	},
+	"dataClasses": [
+		{
+			"name": "Employee",
+			"className": "Employee",
+			"collectionName": "EmployeeCollection",
+			"scope": "public",
+			"publishAsJSGlobal": false,
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "project_EmployeeCollection",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "Project_EmployeeCollection",
+					"reversePath": true,
+					"path": "employee"
+				},
+				{
+					"name": "projectCollectionPM",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "ProjectCollection",
+					"reversePath": true,
+					"path": "PM"
+				},
+				{
+					"name": "projects",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "ProjectCollection",
+					"path": "project_EmployeeCollection.project"
+				},
+				{
+					"name": "name",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "string",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Employee.name.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "salary",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "number",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Employee.salary.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "salaryY",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "number",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Employee.salaryY.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "UUID",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "uuid",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Employee.UUID.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "avatar",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "image",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Employee.avatar.onGet",
+							"userDefined": true
+						}
+					]
+				}
+			],
+			"methods": [
+				{
+					"name": "get",
+					"applyTo": "entity",
+					"scope": "publicOnServer",
+					"from": "model.Employee.entityMethods.get",
+					"userDefined": true
+				},
+				{
+					"name": "getAuthInfos",
+					"applyTo": "entity",
+					"scope": "publicOnServer",
+					"from": "model.Employee.entityMethods.getAuthInfos",
+					"userDefined": true
+				},
+				{
+					"name": "getSkills",
+					"applyTo": "entity",
+					"scope": "publicOnServer",
+					"from": "model.Employee.entityMethods.getSkills",
+					"userDefined": true
+				},
+				{
+					"name": "getSubSet",
+					"applyTo": "dataClass",
+					"scope": "publicOnServer",
+					"from": "model.Employee.methods.getSubSet",
+					"userDefined": true
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"className": "Project",
+			"collectionName": "ProjectCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "Name",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "PM",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Employee",
+					"path": "Employee"
+				},
+				{
+					"name": "Budget",
+					"kind": "storage",
+					"scope": "public",
+					"type": "long"
+				},
+				{
+					"name": "businessDays",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "number",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Project.businessDays.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "StartDate",
+					"kind": "storage",
+					"scope": "public",
+					"type": "date",
+					"simpleDate": false
+				},
+				{
+					"name": "EndDate",
+					"kind": "storage",
+					"scope": "public",
+					"type": "date",
+					"simpleDate": false
+				},
+				{
+					"name": "Workforce",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "word",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Project.Workforce.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "WorkLoad",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "long",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Project.WorkLoad.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "Cost",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "number",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Project.Cost.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "project_EmployeeCollection",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "Project_EmployeeCollection",
+					"reversePath": true,
+					"path": "project"
+				},
+				{
+					"name": "project_SkillCollection",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "Project_SkillCollection",
+					"reversePath": true,
+					"path": "project"
+				},
+				{
+					"name": "employees",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "EmployeeCollection",
+					"path": "project_EmployeeCollection.employee"
+				},
+				{
+					"name": "skills",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "SkillCollection",
+					"path": "project_SkillCollection.skill"
+				}
+			],
+			"events": [
+				{
+					"kind": "onRemove",
+					"from": "model.Project.events.onRemove",
+					"userDefined": true
+				},
+				{
+					"kind": "onRestrictingQuery",
+					"from": "model.Project.events.onRestrictingQuery",
+					"userDefined": true
+				}
+			]
+		},
+		{
+			"name": "Project_Employee",
+			"className": "Project_Employee",
+			"collectionName": "Project_EmployeeCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "employee",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Employee",
+					"path": "Employee"
+				},
+				{
+					"name": "project",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Project",
+					"path": "Project"
+				}
+			]
+		},
+		{
+			"name": "Project_Skill",
+			"className": "Project_Skill",
+			"collectionName": "Project_SkillCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "project",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Project",
+					"path": "Project"
+				},
+				{
+					"name": "skill",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Skill",
+					"path": "Skill"
+				}
+			]
+		},
+		{
+			"name": "Skill",
+			"className": "Skill",
+			"collectionName": "SkillCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"autosequence": true,
+					"type": "long",
+					"indexKind": "btree",
+					"primKey": true
+				},
+				{
+					"name": "project_SkillCollection",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "Project_SkillCollection",
+					"reversePath": true,
+					"path": "skill"
+				},
+				{
+					"name": "projects",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "ProjectCollection",
+					"path": "project_SkillCollection.project"
+				},
+				{
+					"name": "value",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "string",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Skill.value.onGet",
+							"userDefined": true
+						}
+					]
+				}
+			],
+			"methods": [
+				{
+					"name": "getValue",
+					"applyTo": "entity",
+					"scope": "publicOnServer",
+					"from": "model.Skill.entityMethods.getValue",
+					"userDefined": true
+				},
+				{
+					"name": "getValues",
+					"applyTo": "entityCollection",
+					"scope": "publicOnServer",
+					"from": "model.Skill.collectionMethods.getValues",
+					"userDefined": true
+				}
+			]
+		}
+	]
+}
