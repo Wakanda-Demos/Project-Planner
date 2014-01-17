@@ -4,6 +4,7 @@ the WAKANDA datastore with data stored in a distant MySQL server.
 Getting Started
 --------------------------
 1 - create the MySQL database:
+
 	1-1 open "Project-Planner" Solution using WAKANDA
 	1-2 execute the script schema.js under PopulateMySQL folder to create MySQL database schema.
 	1-3 execute the script employee.js under PopulateMySQL folder to populate employee table.
