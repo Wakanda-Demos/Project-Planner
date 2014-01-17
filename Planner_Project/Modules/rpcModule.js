@@ -131,7 +131,12 @@ exports.assignEmployeeToProject = function(employeeIDs, projectID) {
 //@function addModifProject
 //@abstract add/edit a project
 exports.addModifProject = function(project, skillsID) {
-    var eProject, eEmployeePM, empls, pe, len;
+	//	
+	if (!currentSession().belongsTo('Director')) {
+		return;
+	}
+	
+	var eProject, eEmployeePM, empls, pe, len;
 
     //if we want to create a new project
     if (project.newP) {
@@ -197,4 +202,9 @@ exports.getAvatar = function(id) {
     });
 
     return avatar;
-}
+};
+exports.login = function(userName, password){
+	//	http://doc.wakanda.org/loginByPassword.301-724283.en.html
+	var result = loginByPassword(userName, password, 60*60); // session is created in case of success
+	return result; // result is sent to the client
+};

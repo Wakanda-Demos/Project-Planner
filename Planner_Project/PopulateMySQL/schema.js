@@ -2,12 +2,12 @@
 var sql = require('waf-sql');
 
 //The mysql connection
-params = {
-	hostname:	'localhost',
+var params = {
+	hostname:	'192.168.222.47',
 	port:		3306,
     database:	'demo',
     user:		'root',
-    password:	'',
+    password:	'secret',
 	ssl:		false,
     dbType:		'mysql'
 };

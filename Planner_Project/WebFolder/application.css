@@ -325,3 +325,7 @@ background-image: -webkit-linear-gradient(bottom, rgba(255,255,255,0) 0%,rgba(25
 	font-size: 14px;
 	font-weight: normal;
 }
+
+.waf-login-logout a{
+	color:#FFF !important;
+}

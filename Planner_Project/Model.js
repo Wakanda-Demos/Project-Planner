@@ -12,14 +12,15 @@ utils = require('utils.js');
 
 //The mysql connection
 params = {
-	hostname:	'localhost',
+	hostname:	'192.168.222.47',
 	port:		3306,
     database:	'demo',
     user:		'root',
-    password:	'',
+    password:	'secret',
 	ssl:		false,
     dbType:		'mysql'
 };
+
 
 //retreive the IDUUD module for mapping between an ID and an UUID
 IDUUD = utils.IDUUD;
@@ -30,3 +31,5 @@ include("./Model/Skill/Skill-methods.js");
 include("./Model/Project/Project-calculated.js");
 include("./Model/Employee/Employee-calculated.js");
 include("./Model/Project/Project-events.js");
+
+include("./Model/Project/Project-methods.js");

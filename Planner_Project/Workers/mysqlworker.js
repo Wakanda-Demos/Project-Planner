@@ -11,16 +11,6 @@ var wafsql, params, session, errorMsg;
 //use 'waf-sql' module
 wafsql = require('waf-sql');
 
-//The mysql connection
-params = {
-	hostname:	'localhost',
-	port:		3306,
-    database:	'demo',
-    user:		'root',
-    password:	'',
-	ssl:		false,
-    dbType:		'mysql'
-};
 
 try {
     //connect to MySQL Server
@@ -86,7 +76,7 @@ onconnect = function(msg) {
         infos = message.data;
         switch (message.type) {
             //for requesting the given columns from a given table and filter
-            //but uniq result will be given
+            //but unique result will be given
         case 'find':
             var row = session.find(infos.columns, infos.table, infos.filter);
             thePort.postMessage({

@@ -18,8 +18,8 @@
 				"panel": {
 					"isOpen": "true",
 					"position": {
-						"X": 43,
-						"Y": 21
+						"X": 56,
+						"Y": 36
 					}
 				}
 			},
@@ -57,7 +57,12 @@
 		"model": {
 			"scriptMode": "manual",
 			"workspaceLeft": 0,
-			"workspaceTop": 0
+			"workspaceTop": 0,
+			"lastScriptLocation": {
+				"Project": {
+					"method": "Project/Project-methods.js"
+				}
+			}
 		}
 	},
 	"dataClasses": [
@@ -179,13 +184,6 @@
 					"applyTo": "entity",
 					"scope": "publicOnServer",
 					"from": "model.Employee.entityMethods.getAuthInfos",
-					"userDefined": true
-				},
-				{
-					"name": "getSkills",
-					"applyTo": "entity",
-					"scope": "publicOnServer",
-					"from": "model.Employee.entityMethods.getSkills",
 					"userDefined": true
 				},
 				{
@@ -338,6 +336,15 @@
 					"kind": "onRestrictingQuery",
 					"from": "model.Project.events.onRestrictingQuery",
 					"userDefined": true
+				}
+			],
+			"methods": [
+				{
+					"name": "login",
+					"applyTo": "methods",
+					"from": "model.Project.methods.login",
+					"userDefined": true,
+					"scope": "publicOnServer"
 				}
 			]
 		},
