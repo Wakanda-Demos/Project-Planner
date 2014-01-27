@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var comboboxAddModifAllSkills = {};	// @dataGrid
 	var button2 = {};	// @button
 	var btnAddModifPrjOk = {};	// @button
 	var button3 = {};	// @button
@@ -32,6 +33,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
     
 // eventHandlers// @lock
+
+	comboboxAddModifAllSkills.onRowDblClick = function comboboxAddModifAllSkills_onRowDblClick (event)// @startlock
+	{// @endlock
+		btnAddModifPrjAddSkill.click();
+	};// @lock
 
 	button2.click = function button2_click (event)// @startlock
 	{// @endlock
@@ -326,6 +332,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		showView("Edit Project");
 	};// @lock
 
+	dataGridProject.onRowDblClick = function dataGridProject_onRowDblClick (event)// @startlock
+	{// @endlock
+		buttonEditProject.click();
+	};// @lock
+
 	dataGridProject.onRowClick = function dataGridProject_onRowClick (event)// @startlock
 	{// @endlock
 		/**
@@ -334,7 +345,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		*/
 		
 		//	Reset the delete button text
-		$$('buttonDeleteProject').setValue("Remove Project");
+		$$('buttonDeleteProject').setValue("Delete Project");
 		//	Reset the button appearence 
 		$$('buttonDeleteProject').removeClass('error');
 	};// @lock
@@ -342,23 +353,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	buttonDeleteProject.click = function buttonDeleteProject_click (event)// @startlock
 	{// @endlock
 
-		/**
-		*	We ask the user to be sure, before deleting the selected project
-		*	On the first click we modify the text and the appearence of the button
-		*	On the secend click, we remove the project
-		*/
-
-		// If this is the first click
-		if(this.getValue() == "Remove Project"){
-			this.setValue("Are you sure ?");
-			$$('buttonDeleteProject').addClass('error');
-			
-		}
-		// If this is the second click (the confirmation)
-		else{
-			// reset the content and the appearence of the button (for others projects)
-			this.setValue("Remove Project");
-			$$('buttonDeleteProject').removeClass('error');
+		if(window.confirm("Are you sure you want to delete the '"+ sources.project.Name +"'' project")){
 			//	Get the datasource current collection
 			var projectCollection = sources.project.getEntityCollection(); 
 			//	Delete the entity ascociated with the selected project 
@@ -369,7 +364,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		            sources.project.query();
 		        }
 		    });
-		}		
+		}
+
 	};// @lock
 
 	login1.logout = function login1_logout (event)// @startlock
@@ -468,6 +464,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			*		Assigne resources to his project
 			*	Employee can not assign or change
 			*/
+
+			var hideFromEmployee = [
+				"txtBudget",
+				"txtCost"
+			];
 			
 			waf.widgets.cntAllProjects.hide(); 
 			waf.widgets.cntCeateModifyProject.hide(); 
@@ -491,6 +492,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 				
 				switch(view){
 					case 'Add Project':
+						$$('comboboxAddModifManager').setValue('');
 					case 'Edit Project':
 						//	Show the view cntCeateModifyProject
 						waf.widgets.cntCeateModifyProject.show();
@@ -505,6 +507,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 					break;
 				}
 
+				$$('menuItem3').getChildren()[0].setValue("Members");
+				hideFromEmployee.forEach(function (id){
+					$$(id).show();
+				});
+
 				if ( waf.directory.currentUserBelongsTo('Director') )
 				{
 					$$('buttonDeleteProject').show();
@@ -514,6 +521,12 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 				else if (waf.directory.currentUserBelongsTo('Manager') )
 				{
 					$$('btnAssignRes').show();
+				}
+				else{
+					$$('menuItem3').getChildren()[0].setValue("Colleagues");
+					hideFromEmployee.forEach(function (id){
+						$$(id).hide();
+					});
 				}
 
 			}// End else
@@ -682,6 +695,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("dataGridProject", "onRowDblClick", dataGridProject.onRowDblClick, "WAF");
+	WAF.addListener("comboboxAddModifAllSkills", "onRowDblClick", comboboxAddModifAllSkills.onRowDblClick, "WAF");
 	WAF.addListener("button2", "click", button2.click, "WAF");
 	WAF.addListener("btnAddModifPrjOk", "click", btnAddModifPrjOk.click, "WAF");
 	WAF.addListener("button3", "click", button3.click, "WAF");

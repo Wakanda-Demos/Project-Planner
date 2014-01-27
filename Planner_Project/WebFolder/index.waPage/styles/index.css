@@ -3,15 +3,6 @@
 	Changes to this CSS file might be lost when it is regenerated.
 */
 
-#slider1 {
-	 width: 3px;
-	 height: 16px;
-	 top: 504px;
-	 left: 224px;
-	
-	 
-}
-
 #richText33 {
 	 z-index: 13;
 	 width: 290px;
@@ -41,7 +32,7 @@
 	 width: 61px;
 	 height: 20px;
 	 top: 99px;
-	 left: 386px;
+	 left: 378px;
 	
 	 position: absolute;
 	 color: rgb(0, 0, 127);
@@ -391,7 +382,7 @@
 	 height: 120px;
 	 top: 834px;
 	 left: 0px;
-	 right: 94900px;
+	 right: 95434px;
 	
 	 position: absolute;
 	 background-color: rgb(32, 38, 46);
@@ -423,9 +414,10 @@
 	 width: 159px;
 	 height: 26px;
 	 top: 16px;
-	 left: 283px;
+	 left: 277px;
 	
 	 position: absolute;
+	 font-size: 15px;
 	 
 }
 
@@ -433,11 +425,13 @@
 	 z-index: 11;
 	 width: 81px;
 	 height: 25px;
-	 top: 17px;
+	 top: 16px;
 	 left: 186px;
 	
 	 position: absolute;
-	 font-weight: bold;
+	 font-size: 15px;
+	 text-align: left;
+	 color: rgb(102, 102, 102);
 	 
 }
 
@@ -449,24 +443,27 @@
 
 #richText20 {
 	 z-index: 10;
-	 width: 215px;
-	 height: 76px;
+	 width: 217px;
+	 height: 65px;
 	 top: 143px;
 	 left: 277px;
 	
 	 position: absolute;
+	 font-size: 15px;
 	 
 }
 
 #richText19 {
 	 z-index: 9;
 	 width: 67px;
-	 height: 32px;
+	 height: 25px;
 	 top: 143px;
 	 left: 186px;
 	
 	 position: absolute;
-	 font-weight: bold;
+	 font-size: 15px;
+	 text-align: left;
+	 color: rgb(102, 102, 102);
 	 
 }
 
@@ -475,9 +472,10 @@
 	 width: 183px;
 	 height: 27px;
 	 top: 109px;
-	 left: 280px;
+	 left: 277px;
 	
 	 position: absolute;
+	 font-size: 15px;
 	 
 }
 
@@ -485,11 +483,13 @@
 	 z-index: 7;
 	 width: 75px;
 	 height: 25px;
-	 top: 111px;
+	 top: 109px;
 	 left: 186px;
 	
 	 position: absolute;
-	 font-weight: bold;
+	 font-size: 15px;
+	 text-align: left;
+	 color: rgb(102, 102, 102);
 	 
 }
 
@@ -498,9 +498,10 @@
 	 width: 173px;
 	 height: 27px;
 	 top: 79px;
-	 left: 280px;
+	 left: 277px;
 	
 	 position: absolute;
+	 font-size: 15px;
 	 
 }
 
@@ -508,11 +509,13 @@
 	 z-index: 5;
 	 width: 78px;
 	 height: 26px;
-	 top: 80px;
+	 top: 79px;
 	 left: 186px;
 	
 	 position: absolute;
-	 font-weight: bold;
+	 font-size: 15px;
+	 text-align: left;
+	 color: rgb(102, 102, 102);
 	 
 }
 
@@ -520,10 +523,11 @@
 	 z-index: 4;
 	 width: 167px;
 	 height: 27px;
-	 top: 48px;
-	 left: 281px;
+	 top: 47px;
+	 left: 277px;
 	
 	 position: absolute;
+	 font-size: 15px;
 	 
 }
 
@@ -535,7 +539,9 @@
 	 left: 186px;
 	
 	 position: absolute;
-	 font-weight: bold;
+	 font-size: 15px;
+	 text-align: left;
+	 color: rgb(102, 102, 102);
 	 
 }
 
@@ -691,7 +697,7 @@
 }
 
 #menuItem2.waf-state-hover {
-	 color: rgb(26, 188, 156);
+	 color: rgb(85, 85, 85);
 	 
 }
 
@@ -794,9 +800,9 @@
 }
 
 #menuItem3.waf-state-active {
-	 text-shadow: rgba(0, 0, 0, 0.292969) 0px 0px 0px;
 	 background-color: rgb(50, 58, 69);
 	 color: rgb(255, 255, 255);
+	 text-shadow: transparent 0px 0px 0px;
 	 
 }
 
@@ -810,9 +816,9 @@
 	 border-right-width: 0px;
 	 border-bottom-style: none;
 	 border-bottom-width: 0px;
-	 font-size: 15px;
 	 color: rgb(255, 255, 255);
 	 background-color: rgb(50, 58, 69);
+	 font-size: 15px;
 	 
 }
 
@@ -1134,7 +1140,7 @@
 
 #label12 {
 	 z-index: 9;
-	 width: 250px;
+	 width: 246px;
 	 height: 17px;
 	 top: 573px;
 	 left: 666px;
@@ -1209,7 +1215,7 @@
 }
 
 #menuBar3 .waf-menuItem-first.waf-state-active {
-	 font-size: 11px;
+	 font-size: 15px;
 	 font-family: 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Bitstream Vera Sans Mono', monospace;
 	 
 }
