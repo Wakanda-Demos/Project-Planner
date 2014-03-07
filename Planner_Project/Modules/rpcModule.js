@@ -121,11 +121,11 @@ exports.assignEmployeeToProject = function(employeeIDs, projectID) {
     }
 
     // add Project Manager to employee collection
-    pmID = ds.Project.find("ID = :1", projectID).PM.ID;
-    pe = ds.Project_Employee.createEntity();
-    pe.project = ds.Project.find("ID = :1", projectID);
-    pe.employee = ds.Employee.find("ID = :1", pmID);
-    pe.save();
+//    pmID = ds.Project.find("ID = :1", projectID).PM.ID;
+//    pe = ds.Project_Employee.createEntity();
+//    pe.project = ds.Project.find("ID = :1", projectID);
+//    pe.employee = ds.Employee.find("ID = :1", pmID);
+//    pe.save();
 };
 
 //@function addModifProject
@@ -179,12 +179,13 @@ exports.addModifProject = function(project, skillsID) {
             ps.save();
         }
     }
-
+    /*
     //create the Project_Employee entity
     pe = ds.Project_Employee.createEntity();
     pe.project = ds.Project.find("ID = :1", eProject.ID);
     pe.employee = ds.Employee.find("ID = :1", project.PMID);
     pe.save();
+    */
 };
 exports.getAvatar = function(id) {
     var avatar;

@@ -12,7 +12,7 @@ utils = require('utils.js');
 
 //The mysql connection
 params = {
-	hostname:	'192.168.222.47',
+	hostname:	'192.168.222.67',
 	port:		3306,
     database:	'demo',
     user:		'root',

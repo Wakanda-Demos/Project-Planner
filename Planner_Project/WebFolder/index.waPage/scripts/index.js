@@ -2,6 +2,8 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var dataGrid3 = {};	// @dataGrid
+	var dataGrid4 = {};	// @dataGrid
 	var comboboxAddModifAllSkills = {};	// @dataGrid
 	var button2 = {};	// @button
 	var btnAddModifPrjOk = {};	// @button
@@ -33,6 +35,16 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 // @endregion// @endlock
     
 // eventHandlers// @lock
+
+	dataGrid3.onRowDblClick = function dataGrid3_onRowDblClick (event)// @startlock
+	{// @endlock
+		button3.click();
+	};// @lock
+
+	dataGrid4.onRowDblClick = function dataGrid4_onRowDblClick (event)// @startlock
+	{// @endlock
+		btnDel.click();
+	};// @lock
 
 	comboboxAddModifAllSkills.onRowDblClick = function comboboxAddModifAllSkills_onRowDblClick (event)// @startlock
 	{// @endlock
@@ -244,9 +256,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	comboboxAddModifManager.change = function comboboxAddModifManager_change (event)// @startlock
 	{// @endlock
-		
-		objProject.PMName = sources.projectManagers.getCurrentElement().name;
-		objProject.PMID = sources.projectManagers.getCurrentElement().ID;
+		objProject.PMName = sources.projectManagers.name;
+		objProject.PMID = sources.projectManagers.ID;
 		sources.objProject.sync()
 	};// @lock
 
@@ -298,7 +309,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		*	Put the informations about the skills of the selected project on the projectSkills, from the 'dataGridSkills'
 		*
 		*	Synchronize the datasources objProject and projectSkills to show our modifications on the 'cntCeateModifyProject' vue
-		*	and modify the shown vews
+		*	and modify the shown views
 		*/
 		
 		//	The variable newP will be sent to the server, false indicate that this is not a new project (we want to modify an existing project)
@@ -311,6 +322,9 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		objProject.Budget = sources.project.Budget;
 		objProject.StartDate = sources.project.StartDate;
 		objProject.EndDate = sources.project.EndDate;
+		sources.projectManagers.select(projectManagers.map(function(a){
+	            	return a.name;
+	            }).indexOf(objProject.PMName));
 		//	Put the (value,ID) of the skills on the projectSkills datasource
 		sources.skills1.toArray('value, ID', {
         	onSuccess: function(ev) 
@@ -334,7 +348,12 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 	dataGridProject.onRowDblClick = function dataGridProject_onRowDblClick (event)// @startlock
 	{// @endlock
-		buttonEditProject.click();
+		if(waf.directory.currentUserBelongsTo('Director')){
+			buttonEditProject.click();
+		}
+		else if(waf.directory.currentUserBelongsTo('Manager')){
+			btnAssignRes.click();
+		}
 	};// @lock
 
 	dataGridProject.onRowClick = function dataGridProject_onRowClick (event)// @startlock
@@ -362,6 +381,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		        onSuccess: function(event){
 		        	// Synchronize the datasource to show only the remaining projects
 		            sources.project.query();
+					sources.project.selectByKey(projectID);
 		        }
 		    });
 		}
@@ -373,6 +393,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		showView("Home");
 		//	Synchronize datasource project		
 		sources.project.all();
+		sources.project.selectByKey(projectID);
 	};// @lock
 
 	login1.login = function login1_login (event)// @startlock
@@ -407,16 +428,22 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		*	Update the progress bar
 		*/
 		//	Maximum budget of project
-		var projectB = sources.project.Budget;
-		//	Sum of employees salary
-		var employeesB = selectedRessources.reduce(
-			function(pv,cv){
-				return cv.salary + pv
-			},
-			0
-		);
-		//	update the progress bar
-		$$("budgetProgressBar").setValue(Math.ceil(employeesB * sources.project.businessDays), projectB);
+		
+		sources.project.selectByKey(projectID, {
+			onSuccess : function(){
+				var projectB = sources.project.Budget;
+				//	Sum of employees salary
+				var employeesB = selectedRessources.reduce(
+					function(pv,cv){
+						return cv.salary + pv
+					},
+					0
+				);
+				
+				//	update the progress bar
+				$$("budgetProgressBar").setValue(Math.ceil(employeesB * sources.project.businessDays), projectB);
+			}
+		});
 	};// @lock
 
 	btnDel.click = function btnDel_click (event)// @startlock
@@ -616,13 +643,16 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			}
 		);
 		//	ID of selected Project
-		var selectedProjectID =  sources.project.ID;
+		var selectedProjectID =  projectID;
 		//	Call the assignEmployeeToProject RPC function
 		RPC.assignEmployeeToProject(selectedResourcesIDs,selectedProjectID);
 		//	Synchronize the datasource
 		sources.project.query();
+		sources.project.selectByKey(projectID);
 		//	Switch the view
 		showView('Home');
+
+		sources.project.selectByKey(projectID);
 	};// @lock
 
 	btnAssignRes.click = function btnAssignRes_click (event)// @startlock
@@ -631,37 +661,43 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		/**
 		*	Reset the filters
 		*/
+		projectID = sources.project.ID;
 
 		$$("btnFind").disable();
 		//	Show in the combobox just the skills on the project
-		sources.skills1.toArray('value, ID',
-			function(e){
-				arrSkill = e.result.map(function(v){
-						return {
-							value: v.value,
-							ID: v.ID
+		sources.skills1.toArray('value, ID',{
+				onSuccess : function(e){
+					arrSkill = e.result.map(function(v){
+							return {
+								value: v.value,
+								ID: v.ID
+							}
 						}
-					}
-				);
-				arrSkill.push(
-					{
-						value: 'All',
-						ID: 0
-					}
-				);
-				sources.arrSkill.sync();
+					);
+					arrSkill.push(
+						{
+							value: 'All',
+							ID: 0
+						}
+					);
+					sources.arrSkill.sync();
+				}
 			}
 		);
 		
 		sources.arrSkill.sync();
 		//	get founded and assigned (selected) resources from the server
-		foundRessources = RPC.getEmployees(sources.project.ID);
-		selectedRessources = RPC.getSelectedEmployees(sources.project.ID);
+
+
+		foundRessources = RPC.getEmployees(projectID);
+		selectedRessources = RPC.getSelectedEmployees(projectID);
 		
 		sources.foundRessources.sync();
 		sources.selectedRessources.sync();
 		// switch views
 		showView("Assign Resources");
+
+		sources.project.selectByKey(projectID);
 	};// @lock
 
 	buttonAddProject.click = function buttonAddProject_click (event)// @startlock
@@ -695,6 +731,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("dataGrid3", "onRowDblClick", dataGrid3.onRowDblClick, "WAF");
+	WAF.addListener("dataGrid4", "onRowDblClick", dataGrid4.onRowDblClick, "WAF");
 	WAF.addListener("dataGridProject", "onRowDblClick", dataGridProject.onRowDblClick, "WAF");
 	WAF.addListener("comboboxAddModifAllSkills", "onRowDblClick", comboboxAddModifAllSkills.onRowDblClick, "WAF");
 	WAF.addListener("button2", "click", button2.click, "WAF");
