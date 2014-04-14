@@ -1,6 +1,8 @@
 A WAKANDA Application for Planning and managing IT projects that use
 the WAKANDA datastore with data stored in a distant MySQL server.
 
+LIVE DEMO HERE : http://project-planner.wakanda.org/
+
 Getting Started
 --------------------------
 1 - create the MySQL database:
